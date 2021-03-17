@@ -1,0 +1,32 @@
+"C:\Program Files\JetBrains\CLion 2020.3.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_TOOLCHAIN_FILE=C:/scr/vcpkg/scripts/buildsystems/vcpkg.cmake -G "CodeBlocks - NMake Makefiles" C:\Users\eleno\CLionProjects\MagmaStone
+-- The C compiler identification is MSVC 19.28.29333.0
+-- The CXX compiler identification is MSVC 19.28.29333.0
+-- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29333/bin/Hostx86/x64/cl.exe
+-- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29333/bin/Hostx86/x64/cl.exe - works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29333/bin/Hostx86/x64/cl.exe
+-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29333/bin/Hostx86/x64/cl.exe - works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Vulkan: C:/VulkanSDK/1.2.154.1/Lib/vulkan-1.lib  
+CMake Error at C:/scr/vcpkg/scripts/buildsystems/vcpkg.cmake:861 (_find_package):
+  Could not find a package configuration file provided by "glm" with any of
+  the following names:
+
+    glmConfig.cmake
+    glm-config.cmake
+
+  Add the installation prefix of "glm" to CMAKE_PREFIX_PATH or set "glm_DIR"
+  to a directory containing one of the above files.  If "glm" provides a
+  separate development package or SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:13 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-default-visual-studio/CMakeFiles/CMakeOutput.log".

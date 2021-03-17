@@ -1,0 +1,101 @@
+The system is: Windows - 10.0.18363 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29333/bin/Hostx86/x86/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) C/C++ Optimizing Compiler Version 19.28.29333 for x86
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+CMakeCCompilerId.c
+Microsoft (R) Incremental Linker Version 14.28.29333.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCCompilerId.exe 
+CMakeCCompilerId.obj 
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+
+The C compiler identification is MSVC, found in "C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/3.17.5/CompilerIdC/CMakeCCompilerId.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29333/bin/Hostx86/x86/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) C/C++ Optimizing Compiler Version 19.28.29333 for x86
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+CMakeCXXCompilerId.cpp
+Microsoft (R) Incremental Linker Version 14.28.29333.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCXXCompilerId.exe 
+CMakeCXXCompilerId.obj 
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+
+The CXX compiler identification is MSVC, found in "C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/3.17.5/CompilerIdCXX/CMakeCXXCompilerId.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_de369\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_de369.dir\build.make /nologo -L                  CMakeFiles\cmTC_de369.dir\build
+Building C object CMakeFiles/cmTC_de369.dir/testCCompiler.c.obj
+	C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1428~1.293\bin\Hostx86\x86\cl.exe @C:\Users\eleno\AppData\Local\Temp\nm8C98.tmp
+testCCompiler.c
+Linking C executable cmTC_de369.exe
+	"C:\Program Files\JetBrains\CLion 2020.3.1\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_de369.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1428~1.293\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\cmTC_de369.dir\objects1.rsp @C:\Users\eleno\AppData\Local\Temp\nm8CD8.tmp
+	C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/scr/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/CMakeTmp/cmTC_de369.exe -installedDir C:/scr/vcpkg/installed/x86-windows/debug/bin -OutVariable out
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_6c52a\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_6c52a.dir\build.make /nologo -L                  CMakeFiles\cmTC_6c52a.dir\build
+Building C object CMakeFiles/cmTC_6c52a.dir/CMakeCCompilerABI.c.obj
+	C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1428~1.293\bin\Hostx86\x86\cl.exe @C:\Users\eleno\AppData\Local\Temp\nm93DC.tmp
+CMakeCCompilerABI.c
+Linking C executable cmTC_6c52a.exe
+	"C:\Program Files\JetBrains\CLion 2020.3.1\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_6c52a.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1428~1.293\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\cmTC_6c52a.dir\objects1.rsp @C:\Users\eleno\AppData\Local\Temp\nm941B.tmp
+	C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/scr/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/CMakeTmp/cmTC_6c52a.exe -installedDir C:/scr/vcpkg/installed/x86-windows/debug/bin -OutVariable out
+
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_b1496\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_b1496.dir\build.make /nologo -L                  CMakeFiles\cmTC_b1496.dir\build
+Building CXX object CMakeFiles/cmTC_b1496.dir/testCXXCompiler.cxx.obj
+	C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1428~1.293\bin\Hostx86\x86\cl.exe @C:\Users\eleno\AppData\Local\Temp\nm995A.tmp
+testCXXCompiler.cxx
+Linking CXX executable cmTC_b1496.exe
+	"C:\Program Files\JetBrains\CLion 2020.3.1\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_b1496.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1428~1.293\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\cmTC_b1496.dir\objects1.rsp @C:\Users\eleno\AppData\Local\Temp\nm9999.tmp
+	C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/scr/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/CMakeTmp/cmTC_b1496.exe -installedDir C:/scr/vcpkg/installed/x86-windows/debug/bin -OutVariable out
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_16475\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_16475.dir\build.make /nologo -L                  CMakeFiles\cmTC_16475.dir\build
+Building CXX object CMakeFiles/cmTC_16475.dir/CMakeCXXCompilerABI.cpp.obj
+	C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1428~1.293\bin\Hostx86\x86\cl.exe @C:\Users\eleno\AppData\Local\Temp\nm9EB9.tmp
+CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_16475.exe
+	"C:\Program Files\JetBrains\CLion 2020.3.1\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_16475.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1428~1.293\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\cmTC_16475.dir\objects1.rsp @C:\Users\eleno\AppData\Local\Temp\nm9EF8.tmp
+	C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/scr/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio/CMakeFiles/CMakeTmp/cmTC_16475.exe -installedDir C:/scr/vcpkg/installed/x86-windows/debug/bin -OutVariable out
+
+
+

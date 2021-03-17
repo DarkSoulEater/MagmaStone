@@ -1,0 +1,17 @@
+"C:\Program Files\JetBrains\CLion 2020.3.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=C:/scr/vcpkg/scripts/buildsystems/vcpkg.cmake -G "CodeBlocks - MinGW Makefiles" C:\Users\eleno\CLionProjects\MagmaStone
+CMake Error at C:/scr/vcpkg/scripts/buildsystems/vcpkg.cmake:861 (_find_package):
+  Could not find a package configuration file provided by "glm" with any of
+  the following names:
+
+    glmConfig.cmake
+    glm-config.cmake
+
+  Add the installation prefix of "glm" to CMAKE_PREFIX_PATH or set "glm_DIR"
+  to a directory containing one of the above files.  If "glm" provides a
+  separate development package or SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:12 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-debug/CMakeFiles/CMakeOutput.log".

@@ -1,0 +1,3 @@
+C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release/CMakeFiles/MagmaStone.dir
+C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release/CMakeFiles/edit_cache.dir
+C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release/CMakeFiles/rebuild_cache.dir
