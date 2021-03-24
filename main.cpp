@@ -11,7 +11,7 @@
 
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
-
+const uint32_t MAX_FRAMES_IN_FLIGHT = 2;
 
 const std::vector<const char*> validation_layers = {
     "VK_LAYER_KHRONOS_validation"
@@ -105,8 +105,11 @@ class HelloTriangleApplication {
   VkCommandPool command_pool_;
   std::vector<VkCommandBuffer> command_buffers_;
 
-  VkSemaphore image_available_semaphore_;
-  VkSemaphore render_finished_semaphore_;
+  std::vector<VkSemaphore> image_available_semaphore_;
+  std::vector<VkSemaphore> render_finished_semaphore_;
+  std::vector<VkFence> in_flight_fences_;
+  std::vector<VkFence> images_in_flight_;
+  size_t current_frame = 0;
 
   void InitWindow() {
     glfwInit();
@@ -130,7 +133,7 @@ class HelloTriangleApplication {
     CreateFramebuffers();
     CreateCommandPool();
     CreateCommandBuffers();
-    CreateSemaphores();
+    CreateSyncObject();
   }
 
   void MainLoop() {
@@ -143,8 +146,11 @@ class HelloTriangleApplication {
   }
 
   void Cleanup() {
-    vkDestroySemaphore(device_, render_finished_semaphore_, nullptr);
-    vkDestroySemaphore(device_, image_available_semaphore_, nullptr);
+    for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; ++i) {
+      vkDestroySemaphore(device_, render_finished_semaphore_[i], nullptr);
+      vkDestroySemaphore(device_, image_available_semaphore_[i], nullptr);
+      vkDestroyFence(device_, in_flight_fences_[i], nullptr);
+    }
 
     vkDestroyCommandPool(device_, command_pool_, nullptr);
 
@@ -154,6 +160,7 @@ class HelloTriangleApplication {
 
     vkDestroyPipeline(device_, graphics_pipeline_, nullptr);
     vkDestroyPipelineLayout(device_, pipeline_layout_, nullptr);
+    vkDestroyRenderPass(device_, render_pass_, nullptr);
 
     for (auto image_view : swap_chain_image_views_) {
       vkDestroyImageView(device_, image_view, nullptr);
@@ -186,7 +193,8 @@ class HelloTriangleApplication {
     app_info.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
     app_info.pEngineName = "No Engine";
     app_info.engineVersion = VK_MAKE_VERSION(1, 0, 0);
-    app_info.apiVersion = VK_API_VERSION_1_0;
+    app_info.apiVersion = VK_API_VERSION_1_2;
+    app_info.pNext = VK_NULL_HANDLE;
 
     VkInstanceCreateInfo create_info{};
     create_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
@@ -212,32 +220,17 @@ class HelloTriangleApplication {
     if (vkCreateInstance(&create_info, nullptr, &instance_) != VK_SUCCESS) {
       throw std::runtime_error("Failed to create instance!");
     }
-    /*
-     // Выводит поддерживаемые расширения
-    uint32_t extensionCount = 0;
-
-    vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-
-    std::vector<VkExtensionProperties> extensions_(extensionCount);
-
-    vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions_.data());
-    std::cout << "available extensions:\n";
-
-    for (const auto& extension : extensions_) {
-      std::cout << '\t' << extension.extensionName << '\n';
-    }
-  */
   }
 
   void PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& create_info) {
     create_info = {};
     create_info.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
     create_info.messageSeverity =
-        VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
+              VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
             | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
             | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
     create_info.messageType =
-        VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
+              VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
             | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
             | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
     create_info.pfnUserCallback = DebugCallback;
@@ -305,6 +298,7 @@ class HelloTriangleApplication {
     }
 
     VkPhysicalDeviceFeatures device_features{};
+    device_features.multiViewport = VK_TRUE;
 
     VkDeviceCreateInfo create_info{};
     create_info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
@@ -437,12 +431,22 @@ class HelloTriangleApplication {
     subpass.colorAttachmentCount = 1;
     subpass.pColorAttachments = &color_attachment_ref;
 
+    VkSubpassDependency dependency{};
+    dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
+    dependency.dstSubpass = 0;
+    dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    dependency.srcAccessMask = 0;
+    dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+
     VkRenderPassCreateInfo render_pass_info{};
     render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
     render_pass_info.attachmentCount = 1;
     render_pass_info.pAttachments = &color_attachment;
     render_pass_info.subpassCount = 1;
     render_pass_info.pSubpasses = &subpass;
+    render_pass_info.dependencyCount = 1;
+    render_pass_info.pDependencies = &dependency;
 
     if (vkCreateRenderPass(device_, &render_pass_info, nullptr, &render_pass_) != VK_SUCCESS) {
       throw std::runtime_error("failed to create render pass!");
@@ -508,12 +512,12 @@ class HelloTriangleApplication {
     viewport_state.scissorCount = 1;
     viewport_state.pScissors = &scissor;
 
-
+    // Rasterizer
     VkPipelineRasterizationStateCreateInfo rasterizer{};
     rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
     rasterizer.depthClampEnable = VK_FALSE;
     rasterizer.rasterizerDiscardEnable = VK_FALSE;
-    rasterizer.rasterizerDiscardEnable = VK_FALSE;
+    rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
     rasterizer.lineWidth = 1.0f;
     rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
     rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
@@ -674,25 +678,44 @@ class HelloTriangleApplication {
     }
   }
 
-  void CreateSemaphores() {
+  void CreateSyncObject() {
+    image_available_semaphore_.resize(MAX_FRAMES_IN_FLIGHT);
+    render_finished_semaphore_.resize(MAX_FRAMES_IN_FLIGHT);
+    in_flight_fences_.resize(MAX_FRAMES_IN_FLIGHT);
+    images_in_flight_.resize(swap_chain_images_.size(), VK_NULL_HANDLE);
+
     VkSemaphoreCreateInfo semaphore_info{};
     semaphore_info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
-    if (vkCreateSemaphore(device_, &semaphore_info, nullptr, &image_available_semaphore_) != VK_SUCCESS ||
-        vkCreateSemaphore(device_, &semaphore_info, nullptr, &render_finished_semaphore_) != VK_SUCCESS) {
+    VkFenceCreateInfo fence_info{};
+    fence_info.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+    fence_info.flags = VK_FENCE_CREATE_SIGNALED_BIT;
 
-      throw std::runtime_error("failed to create semaphores!");
+    for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; ++i) {
+      if (vkCreateSemaphore(device_, &semaphore_info, nullptr, &image_available_semaphore_[i]) != VK_SUCCESS ||
+          vkCreateSemaphore(device_, &semaphore_info, nullptr, &render_finished_semaphore_[i]) != VK_SUCCESS ||
+          vkCreateFence(device_, &fence_info, nullptr, &in_flight_fences_[i]) != VK_SUCCESS) {
+
+        throw std::runtime_error("failed to create sync object for a frame!");
+      }
     }
   }
 
   void DrawFrame() {
+    vkWaitForFences(device_, 1, &in_flight_fences_[current_frame], VK_TRUE, UINT64_MAX);
+
     uint32_t image_index;
-    vkAcquireNextImageKHR(device_, swap_chain_, UINT64_MAX, image_available_semaphore_, VK_NULL_HANDLE, &image_index);
+    vkAcquireNextImageKHR(device_, swap_chain_, UINT64_MAX, image_available_semaphore_[current_frame], VK_NULL_HANDLE, &image_index);
+
+    if (images_in_flight_[image_index] != VK_NULL_HANDLE) {
+      vkWaitForFences(device_, 1, &images_in_flight_[image_index], VK_TRUE, UINT64_MAX);
+    }
+    images_in_flight_[image_index] = in_flight_fences_[current_frame];
 
     VkSubmitInfo submit_info{};
     submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
-    VkSemaphore wait_semaphores[] = {image_available_semaphore_};
+    VkSemaphore wait_semaphores[] = {image_available_semaphore_[current_frame]};
     VkPipelineStageFlags wait_stages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
     submit_info.waitSemaphoreCount = 1;
     submit_info.pWaitSemaphores = wait_semaphores;
@@ -700,22 +723,15 @@ class HelloTriangleApplication {
     submit_info.commandBufferCount = 1;
     submit_info.pCommandBuffers = &command_buffers_[image_index];
 
-    VkSemaphore signal_semaphores[] = {render_finished_semaphore_};
+    VkSemaphore signal_semaphores[] = {render_finished_semaphore_[current_frame]};
     submit_info.signalSemaphoreCount = 1;
     submit_info.pSignalSemaphores = signal_semaphores;
 
-    if (vkQueueSubmit(graphics_queue_, 1, &submit_info, VK_NULL_HANDLE) != VK_SUCCESS) {
+    vkResetFences(device_, 1, &in_flight_fences_[current_frame]);
+
+    if (vkQueueSubmit(graphics_queue_, 1, &submit_info, in_flight_fences_[current_frame]) != VK_SUCCESS) {
       throw std::runtime_error("failed to submit draw command buffer!");
     }
-
-    VkSubpassDependency dependency{};
-    dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
-    dependency.dstSubpass = 0;
-    dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-    dependency.srcAccessMask = 0;
-    dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-    dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
-
 
     VkPresentInfoKHR present_info{};
     present_info.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
@@ -727,9 +743,10 @@ class HelloTriangleApplication {
     present_info.swapchainCount = 1;
     present_info.pSwapchains = swap_chains;
     present_info.pImageIndices = &image_index;
-    present_info.pResults = nullptr; // Optional
 
     vkQueuePresentKHR(present_queue_, &present_info);
+
+    current_frame = (current_frame + 1) % MAX_FRAMES_IN_FLIGHT;
   }
 
   VkShaderModule CreateShaderModule(const std::vector<char>& code) {
@@ -939,7 +956,9 @@ class HelloTriangleApplication {
       const VkDebugUtilsMessengerCallbackDataEXT* p_callback_data,
       void* p_user_data) {
 
-    std::cerr << "validation layer: " << p_callback_data->pMessage << std::endl;
+    if (message_severity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) {
+      std::cerr << "validation layer: " << p_callback_data->pMessage << std::endl;
+    }
 
     return VK_FALSE;
   }
