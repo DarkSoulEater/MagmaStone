@@ -6,5 +6,5 @@ CXX_FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /O2 /Ob2 /DNDEBUG -MD   -std:c++17
 
 CXX_DEFINES = -DGLFW_DLL
 
-CXX_INCLUDES = -IC:\VulkanSDK\1.2.154.1\Include -IC:\scr\vcpkg\installed\x86-windows\include 
+CXX_INCLUDES = -IC:\VulkanSDK\1.2.154.1\Include -IC:\src\vcpkg\installed\x86-windows\include 
 

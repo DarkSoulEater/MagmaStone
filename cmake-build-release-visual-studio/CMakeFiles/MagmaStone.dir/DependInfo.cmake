@@ -16,7 +16,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "C:/VulkanSDK/1.2.154.1/Include"
-  "C:/scr/vcpkg/installed/x86-windows/include"
+  "C:/src/vcpkg/installed/x86-windows/include"
   )
 
 # Targets to which this target links.

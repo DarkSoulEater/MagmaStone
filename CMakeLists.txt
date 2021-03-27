@@ -13,3 +13,9 @@ find_package(glfw3 CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} glfw)
 
 find_package(glm CONFIG REQUIRED)
+
+find_path(STB_INCLUDE_DIRS "stb.h")
+target_include_directories(${PROJECT_NAME} PRIVATE ${STB_INCLUDE_DIRS})
+
+find_package(tinyobjloader CONFIG REQUIRED)
+#target_link_libraries(${PROJECT_NAME} PRIVATE tinyobjloader::tinyobjloader)

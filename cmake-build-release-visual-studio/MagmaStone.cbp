@@ -5,7 +5,7 @@
 		<Option title="MagmaStone"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="msvc8"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\scr\;CMake Files\..\..\..\..\scr\vcpkg\;CMake Files\..\..\..\..\scr\vcpkg\scripts\;CMake Files\..\..\..\..\scr\vcpkg\scripts\buildsystems\;CMake Files\..\..\..\..\scr\vcpkg\installed\;CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\;CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\share\;CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\share\glfw3\;CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\share\glm\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\src\;CMake Files\..\..\..\..\src\vcpkg\;CMake Files\..\..\..\..\src\vcpkg\scripts\;CMake Files\..\..\..\..\src\vcpkg\scripts\buildsystems\;CMake Files\..\..\..\..\src\vcpkg\installed\;CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\;CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\;CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\glfw3\;CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\glm\;CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\tinyobjloader\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="C:/Users/eleno/CLionProjects/MagmaStone/cmake-build-release-visual-studio"/>
@@ -26,7 +26,7 @@
 				<Compiler>
 					<Add option="-DGLFW_DLL"/>
 					<Add directory="C:/VulkanSDK/1.2.154.1/Include"/>
-					<Add directory="C:/scr/vcpkg/installed/x86-windows/include"/>
+					<Add directory="C:/src/vcpkg/installed/x86-windows/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -51,7 +51,7 @@
 				<Compiler>
 					<Add option="-DGLFW_DLL"/>
 					<Add directory="C:/VulkanSDK/1.2.154.1/Include"/>
-					<Add directory="C:/scr/vcpkg/installed/x86-windows/include"/>
+					<Add directory="C:/src/vcpkg/installed/x86-windows/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -94,26 +94,41 @@
 		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../scr/vcpkg/scripts/buildsystems/vcpkg.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\scr\vcpkg\scripts\buildsystems\"/>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/scripts/buildsystems/vcpkg.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\scripts\buildsystems\"/>
 		</Unit>
-		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../scr/vcpkg/installed/x86-windows/share/glfw3/glfw3Config.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\share\glfw3\"/>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/glfw3/glfw3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\glfw3\"/>
 		</Unit>
-		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../scr/vcpkg/installed/x86-windows/share/glfw3/glfw3ConfigVersion.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\share\glfw3\"/>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/glfw3/glfw3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\glfw3\"/>
 		</Unit>
-		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../scr/vcpkg/installed/x86-windows/share/glfw3/glfw3Targets-debug.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\share\glfw3\"/>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/glfw3/glfw3Targets-debug.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\glfw3\"/>
 		</Unit>
-		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../scr/vcpkg/installed/x86-windows/share/glfw3/glfw3Targets-release.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\share\glfw3\"/>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/glfw3/glfw3Targets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\glfw3\"/>
 		</Unit>
-		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../scr/vcpkg/installed/x86-windows/share/glfw3/glfw3Targets.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\share\glfw3\"/>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/glfw3/glfw3Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\glfw3\"/>
 		</Unit>
-		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../scr/vcpkg/installed/x86-windows/share/glm/glm-config.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\scr\vcpkg\installed\x86-windows\share\glm\"/>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/glm/glm-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\glm\"/>
+		</Unit>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/tinyobjloader/tinyobjloader-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\tinyobjloader\"/>
+		</Unit>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/tinyobjloader/tinyobjloader-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\tinyobjloader\"/>
+		</Unit>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/tinyobjloader/tinyobjloader-targets-debug.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\tinyobjloader\"/>
+		</Unit>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/tinyobjloader/tinyobjloader-targets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\tinyobjloader\"/>
+		</Unit>
+		<Unit filename="C:/Users/eleno/CLionProjects/MagmaStone/../../../../src/vcpkg/installed/x86-windows/share/tinyobjloader/tinyobjloader-targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\src\vcpkg\installed\x86-windows\share\tinyobjloader\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>
