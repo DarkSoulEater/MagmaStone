@@ -483,10 +483,8 @@ class HelloTriangleApplication {
 
     create_info.preTransform = swap_chain_support.capabilities.currentTransform;
     create_info.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
-
     create_info.presentMode = present_mode;
     create_info.clipped = VK_TRUE;
-
     create_info.oldSwapchain = VK_NULL_HANDLE;
 
     if (vkCreateSwapchainKHR(device_, &create_info, nullptr, &swap_chain_) != VK_SUCCESS) {
@@ -1105,6 +1103,9 @@ class HelloTriangleApplication {
   }
 
   void CreateTextureSampler() {
+    VkPhysicalDeviceProperties properties{};
+    vkGetPhysicalDeviceProperties(physical_device_, &properties);
+
     VkSamplerCreateInfo sampler_info{};
     sampler_info.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
     sampler_info.magFilter = VK_FILTER_LINEAR;
@@ -1113,9 +1114,6 @@ class HelloTriangleApplication {
     sampler_info.addressModeV = VK_SAMPLER_ADDRESS_MODE_REPEAT;
     sampler_info.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
     sampler_info.anisotropyEnable = VK_TRUE;
-
-    VkPhysicalDeviceProperties properties{};
-    vkGetPhysicalDeviceProperties(physical_device_, &properties);
     sampler_info.maxAnisotropy = properties.limits.maxSamplerAnisotropy;
     sampler_info.borderColor = VK_BORDER_COLOR_INT_OPAQUE_BLACK;
     sampler_info.unnormalizedCoordinates = VK_FALSE;
@@ -1177,7 +1175,7 @@ class HelloTriangleApplication {
     VkMemoryAllocateInfo allocate_info{};
     allocate_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
     allocate_info.allocationSize = memory_requirements.size;
-    allocate_info.memoryTypeIndex = FindMemoryType(memory_requirements.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+    allocate_info.memoryTypeIndex = FindMemoryType(memory_requirements.memoryTypeBits, properties);
 
     if (vkAllocateMemory(device_, &allocate_info, nullptr, &image_memory) != VK_SUCCESS) {
       throw std::runtime_error("Failed to allocate image memory!");
@@ -1493,8 +1491,7 @@ class HelloTriangleApplication {
 
   VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &available_formats) {
     for (const auto &available_format : available_formats) {
-      if (    available_format.format == VK_FORMAT_B8G8R8_SRGB
-           && available_format.colorSpace == VK_COLOR_SPACE_ADOBERGB_LINEAR_EXT) {
+      if (    available_format.format == VK_FORMAT_B8G8R8A8_SRGB && available_format.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
         return available_format;
       }
     }
